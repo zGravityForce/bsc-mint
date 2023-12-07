@@ -8,10 +8,17 @@ const address = '';
 const privateKey = '';
 const recipientAddress = address;
 
+// const getBaseFee = async () => {
+//   const latestBlock = await web3.eth.getBlock('latest');
+//   return latestBlock.baseFeePerGas;
+// };
 
 
 const sendBNBWithData = async (recipient, amount, hexData, nonce) => {
-  const gasPrice = await web3.eth.getGasPrice(); // get current gas
+  // const gasPrice = await web3.eth.getGasPrice();
+  const gasPrice = await web3.utils.toWei('10', 'gwei'); // get current gas
+
+
   console.log('current gas:', gasPrice)
 
   const tx = {
@@ -20,6 +27,8 @@ const sendBNBWithData = async (recipient, amount, hexData, nonce) => {
     nonce: nonce,
     gas: 22000,
     gasPrice: gasPrice,
+    // maxFeePerGas: maxFeePerGas,
+    // maxPriorityFeePerGas: maxPriorityFeePerGas,
     value: web3.utils.toWei(amount, 'ether'),
     data: hexData,
   };
